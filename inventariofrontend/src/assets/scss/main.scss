@@ -5,7 +5,9 @@
 @import "/node_modules/bootstrap/scss/grid";
 @import "/node_modules/bootstrap/scss/navbar";
 @import "/node_modules/bootstrap/scss/forms";
-
+.bg-custom-blue-800{
+  background-color: $blue-800;
+}
 .prueba-color{
   background-color: $orange-700 !important;
   color:white !important;
