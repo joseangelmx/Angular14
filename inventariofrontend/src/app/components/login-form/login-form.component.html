@@ -1,6 +1,6 @@
 <form>
   <!-- 2 column grid layout with text inputs for the first and last names -->
-  <div class="row">
+  <div class="row" *ngIf="isSignUp== true">
 
     <mat-form-field appearance="outline" class="col-md-6 mb-4">
       <mat-label>First Name</mat-label>
@@ -26,6 +26,6 @@
 
 
   <!-- Submit button -->
-  <button mat-raised-button class="col-md-12" color="primary">Sign in / Sign up</button>
+  <button mat-raised-button class="col-md-12" color="primary">{{isSignUp ? 'Sign Up' : 'Sign In'}}</button>
 
 </form>
