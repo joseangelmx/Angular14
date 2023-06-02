@@ -1,4 +1,4 @@
-import { Component,Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component,EventEmitter,Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -8,7 +8,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 })
 export class LoginFormComponent implements OnChanges{
 @Input() isSignUp!: boolean;
-
+@Output() responseForm: EventEmitter <any> = new EventEmitter()
 formUser!: FormGroup;
 defaultFields = {
   email: new FormControl('',[Validators.required,Validators.email]),
@@ -37,10 +37,6 @@ initForm(){
 }
 
 onSubmit(){
-  if(this.formUser.invalid){
-    alert('Debe ingresar todos los campos');
-    return;
-  }
-  console.log("Form Submitted", this.formUser.value);
+  this.responseForm.emit(this.formUser)
 }
 }

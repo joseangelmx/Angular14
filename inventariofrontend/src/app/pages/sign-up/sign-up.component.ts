@@ -6,5 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./sign-up.component.scss']
 })
 export class SignUpComponent {
-
+  respForm(response: any){
+    console.log('Respuesta desde Sign Up', response)
+  }
 }
