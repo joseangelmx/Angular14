@@ -1,5 +1,5 @@
 import { Component,Input } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login-form',
@@ -8,8 +8,28 @@ import { NgForm } from '@angular/forms';
 })
 export class LoginFormComponent {
 @Input() isSignUp: boolean= true;
-onSubmitForm(f:NgForm){
-  console.log('Valores del form',f.value);
-  console.log('Mi formulario',f);
+
+formUser!: FormGroup;
+constructor(
+  private fb:FormBuilder
+){
+  this.initForm();
+}
+
+initForm(){
+  this.formUser = this.fb.group({
+    name:[''],
+    lastname:[''],
+    email:['', Validators.required],
+    password:['']
+  })
+}
+
+onSubmit(){
+  if(this.formUser.invalid){
+    alert('Debe ingresar todos los campos');
+    return;
+  }
+  console.log("Form Submitted", this.formUser.value);
 }
 }
