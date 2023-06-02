@@ -26,6 +26,6 @@
 
 
   <!-- Submit button -->
-  <button type="submit" mat-raised-button class="col-md-12" color="primary">{{isSignUp ? 'Sign Up' : 'Sign In'}}</button>
+  <button type="submit" mat-raised-button class="col-md-12" color="primary" [disabled]="formUser.invalid">{{isSignUp ? 'Sign Up' : 'Sign In'}}</button>
 
 </form>
