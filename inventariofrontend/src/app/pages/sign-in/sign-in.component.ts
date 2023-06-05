@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { signIn } from 'src/app/core/interfaces/user';
 import { AccountService } from 'src/app/core/services/account.service';
 @Component({
   selector: 'app-sign-in',
@@ -8,8 +9,9 @@ import { AccountService } from 'src/app/core/services/account.service';
 })
 export class SignInComponent {
   constructor(private login:AccountService){}
-respForm(response: any){
+
+respForm(response: signIn){
   console.log('Respuesta desde Sign In', response);
-  this.login.SignIn(response.value).subscribe(console.log);
+  this.login.SignIn(response).subscribe(console.log);
 }
 }

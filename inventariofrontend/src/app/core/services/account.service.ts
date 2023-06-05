@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { User, signIn } from '../interfaces/user';
 @Injectable({
   providedIn: 'root'
 })
@@ -14,13 +15,13 @@ export class AccountService {
   }
   constructor(private http: HttpClient) { }
 
-  SignIn(request: any):Observable<any>{
+  SignIn(request: signIn):Observable<any>{
     let url: string = `${this.urlBase}api/account`;
     return this.http.post<any>(url,request,this.httpOptions);
   }
 
-  SignUp(request: any){
+  SignUp(request: User): Observable<any>{
     let url: string = `${this.urlBase}api/user`;
-    return this.http.post<any>(url,request,this.httpOptions);
+    return <any> this.http.post(url,request,this.httpOptions);
   }
 }
