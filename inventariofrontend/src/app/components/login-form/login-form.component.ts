@@ -15,8 +15,9 @@ defaultFields = {
   password: new FormControl('',Validators.required)
 }
 extraFields = {
-name: new FormControl(''),
-lastname: new FormControl('')
+firstName: new FormControl('',Validators.required),
+lastName: new FormControl('',Validators.required),
+phoneNumber: new FormControl('', Validators.required)
 }
 constructor(
   private fb:FormBuilder
