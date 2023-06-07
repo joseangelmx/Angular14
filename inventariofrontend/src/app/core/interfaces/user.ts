@@ -13,3 +13,8 @@ export interface signIn{
 export interface signUp{
 
 }
+export interface signInResponse{
+  title:string;
+  status:number;
+  message:string;
+}

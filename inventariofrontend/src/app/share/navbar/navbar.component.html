@@ -5,7 +5,7 @@
   </button>
 
   <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0" *ngIf="!hasSession; else withSession">
       <li class="nav-item active">
         <a class="nav-link" [routerLink]="['/sign-in']">Sign in</a>
       </li>
@@ -15,3 +15,10 @@
     </ul>
   </div>
 </nav>
+<ng-template #withSession>
+  <ul>
+    <li>
+      <a class="nav-link" [routerLink]="['/sign-in']">Sign Out</a>
+    </li>
+  </ul>
+  </ng-template>
