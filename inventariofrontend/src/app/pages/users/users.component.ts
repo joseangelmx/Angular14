@@ -22,6 +22,7 @@ export class UsersComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
+  display: string = 'none';
 constructor (
 private accountService:AccountService
 ){ }
@@ -40,5 +41,12 @@ applyFilter(event: Event) {
   if (this.dataSource.paginator) {
     this.dataSource.paginator.firstPage();
   }
+}
+openModal(row:User){
+  console.log('Row Selected',row)
+  this.display ="block";
+}
+onCloseHandled(){
+  this.display = "none"
 }
 }
