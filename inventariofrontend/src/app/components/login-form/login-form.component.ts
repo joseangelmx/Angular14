@@ -1,5 +1,7 @@
 import { Component,EventEmitter,Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { CookieService } from 'ngx-cookie';
+import { User } from 'src/app/core/interfaces/user';
 
 @Component({
   selector: 'app-login-form',
@@ -8,7 +10,10 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 })
 export class LoginFormComponent implements OnChanges{
 @Input() isSignUp!: boolean;
+@Input()confirmButtonText='Sign-In';
+@Input() dataUser?:User;
 @Output() responseForm: EventEmitter <any> = new EventEmitter()
+@Output() cancelForm:EventEmitter<boolean> = new EventEmitter();
 formUser!: FormGroup;
 defaultFields = {
   email: new FormControl('',[Validators.required,Validators.email]),
@@ -19,14 +24,36 @@ firstName: new FormControl('',Validators.required),
 lastName: new FormControl('',Validators.required),
 phoneNumber: new FormControl('', Validators.required)
 }
+  hasSession: boolean =false;;
 constructor(
-  private fb:FormBuilder
+  private fb:FormBuilder,
+  private cookie: CookieService
 ){
 }
 ngOnChanges(changes: SimpleChanges): void {
-  console.log(changes);
+
+  const {dataUser} = changes;
   this.initForm();
+  this.validatorSession();
+  if(!!dataUser.currentValue){
+    this.loadUserInForm(dataUser?.currentValue);
+  }
 }
+  loadUserInForm(currentValue: User) {
+    this.formUser.patchValue(currentValue)
+  }
+  validatorSession() {
+    const session = this.cookie.get('session');
+      let dataUser;
+      if(!!session){
+        dataUser = JSON.parse(atob(session != undefined ? session : ''))
+      }
+      if(dataUser?.hasSession){
+        this.hasSession=true;
+      }else{
+        this.hasSession=false;
+      }
+  }
 initForm(){
   let userFields = {...this.defaultFields};
   if(this.isSignUp){
@@ -35,9 +62,13 @@ initForm(){
   this.formUser = this.fb.group(
     userFields
   )
+  this.formUser.removeControl('password');
 }
 
 onSubmit(){
   this.responseForm.emit(this.formUser.value)
+}
+cancelBtn(){
+ this.cancelForm?.emit();
 }
 }

@@ -23,13 +23,15 @@
   </mat-form-field>
 
   <!-- Password input -->
-  <mat-form-field appearance="outline" class="col-md-12 mb-4">
+  <mat-form-field appearance="outline" class="col-md-12 mb-4" *ngIf="!dataUser">
     <mat-label>Password</mat-label>
     <input matInput placeholder="your password" formControlName="password">
   </mat-form-field>
+<div class="row">
+  <button mat-raised-button class="col-md-6 pr-2 mr-2" *ngIf="hasSession"(click)="cancelBtn()"></button>
+  <button type="submit" mat-raised-button class="pl-2 ml-2" [ngClass]="{ 'col-md-12': !hasSession,'col-md-6':hasSession}"
+    color="primary" [disabled]="formUser.invalid">{{confirmButtonText}}</button>
 
-
-  <!-- Submit button -->
-  <button type="submit" mat-raised-button class="col-md-12" color="primary" [disabled]="formUser.invalid">{{isSignUp ? 'Sign Up' : 'Sign In'}}</button>
+</div>
 
 </form>

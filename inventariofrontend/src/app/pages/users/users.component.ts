@@ -25,6 +25,7 @@ export class UsersComponent implements OnInit {
   @ViewChild(MatSort) sort!: MatSort;
   display: string = 'none';
 rowSelected: User | undefined;
+newUser =false;
   constructor (
 private accountService:AccountService,
 public dialog:MatDialog
@@ -49,8 +50,12 @@ openModal(row:User){
 
   this.rowSelected= row;
 }
+openModalNew(){
+  this.newUser=true;
+}
 onCloseHandled(){
 this.rowSelected =undefined;
+this.newUser=false;
 }
 animal: string | undefined;
 name: string | undefined;
