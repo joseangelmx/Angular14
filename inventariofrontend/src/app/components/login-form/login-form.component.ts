@@ -24,7 +24,7 @@ firstName: new FormControl('',Validators.required),
 lastName: new FormControl('',Validators.required),
 phoneNumber: new FormControl('', Validators.required)
 }
-  hasSession: boolean =false;;
+  hasSession: boolean = false;
 constructor(
   private fb:FormBuilder,
   private cookie: CookieService
@@ -62,13 +62,16 @@ initForm(){
   this.formUser = this.fb.group(
     userFields
   )
+  if(!!this.dataUser){
   this.formUser.removeControl('password');
+  this.formUser.removeControl('email');
+  }
 }
 
 onSubmit(){
   this.responseForm.emit(this.formUser.value)
 }
 cancelBtn(){
- this.cancelForm?.emit();
+ this.cancelForm?.emit(true);
 }
 }

@@ -3,6 +3,7 @@ import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dial
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { Subscription } from 'rxjs';
 import { User } from 'src/app/core/interfaces/user';
 import { AccountService } from 'src/app/core/services/account.service';
 
@@ -26,17 +27,22 @@ export class UsersComponent implements OnInit {
   display: string = 'none';
 rowSelected: User | undefined;
 newUser =false;
+  DataUsers!: Subscription;
   constructor (
 private accountService:AccountService,
 public dialog:MatDialog
 ){ }
 ngOnInit(): void {
-  this.accountService.getUsers().subscribe(response =>{
-    this.dataSource = new MatTableDataSource(response.model)
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-  });
+  this.loadData();
 }
+  loadData() {
+    this.DataUsers =
+    this.accountService.getUsers().subscribe(response =>{
+      this.dataSource = new MatTableDataSource(response.model)
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    });
+  }
 
 applyFilter(event: Event) {
   const filterValue = (event.target as HTMLInputElement).value;
@@ -53,9 +59,13 @@ openModal(row:User){
 openModalNew(){
   this.newUser=true;
 }
-onCloseHandled(){
+onCloseHandled(dataModal:any){
 this.rowSelected =undefined;
 this.newUser=false;
+if(dataModal.refreshData){
+  this.DataUsers.unsubscribe();
+  this.loadData();
+}
 }
 animal: string | undefined;
 name: string | undefined;

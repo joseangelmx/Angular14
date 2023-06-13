@@ -10,7 +10,7 @@ import { AccountService } from 'src/app/core/services/account.service';
 export class UserEditorComponent implements OnInit{
 @Input() row?: User;
 @Input() confirmButtonText='Create User'
-@Output() closeModalEvent: EventEmitter<boolean> = new EventEmitter<boolean>()
+@Output() closeModalEvent: EventEmitter<Object> = new EventEmitter<Object>()
 myModal!: bootstrap.Modal;
 constructor(
 private userService:AccountService
@@ -20,15 +20,30 @@ private userService:AccountService
 ngOnInit(): void {
   this.myModal = new bootstrap.Modal(<HTMLInputElement>document.getElementById('staticBackdrop'));
   this.myModal.show()
-
+  if(!!this.row){
+    this.confirmButtonText ='Update User';
+  }
 }
-closeModal(){
+closeModal(refresh:boolean= false){
   this.myModal.hide();
-  this.closeModalEvent.emit(true);
+  let close ={
+    closeModal:true,
+    refreshData:refresh
+  }
+  this.closeModalEvent.emit(close);
 }
 respForm(response:User){
   let request = {...response,status:true}
-  this.userService.SignUp(request).subscribe(console.log);
+
+  if(!!this.row && this.row.id != undefined){
+    this.userService.updateUser(request,this.row.id).subscribe((resp)=>{
+      if(!resp.hasError){
+        this.closeModal(true);
+      }
+    });
+  }else{
+    this.userService.SignUp(request).subscribe(console.log);
+  }
 }
 cancelForm(close:boolean){
   if(close){

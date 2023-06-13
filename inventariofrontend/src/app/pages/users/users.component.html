@@ -43,5 +43,5 @@
   <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
 </div>
 
-<app-user-editor *ngIf="rowSelected || newUser" [row]="rowSelected" (closeModalEvent)="onCloseHandled()"></app-user-editor>
+<app-user-editor *ngIf="rowSelected || newUser" [row]="rowSelected" (closeModalEvent)="onCloseHandled($event)"></app-user-editor>
 

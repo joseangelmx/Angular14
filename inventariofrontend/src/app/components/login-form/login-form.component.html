@@ -19,7 +19,7 @@
   <!-- Email input -->
   <mat-form-field appearance="outline" class="col-md-12 mb-4">
     <mat-label>Email</mat-label>
-    <input matInput placeholder="pat@example.com" formControlName="email">
+    <input matInput placeholder="pat@example.com" formControlName="email" *ngIf="!dataUser">
   </mat-form-field>
 
   <!-- Password input -->
@@ -28,7 +28,7 @@
     <input matInput placeholder="your password" formControlName="password">
   </mat-form-field>
 <div class="row">
-  <button mat-raised-button class="col-md-6 pr-2 mr-2" *ngIf="hasSession"(click)="cancelBtn()"></button>
+  <button mat-raised-button class="col-md-6 pr-2 mr-2" *ngIf="hasSession"(click)="cancelBtn()">Cancelar</button>
   <button type="submit" mat-raised-button class="pl-2 ml-2" [ngClass]="{ 'col-md-12': !hasSession,'col-md-6':hasSession}"
     color="primary" [disabled]="formUser.invalid">{{confirmButtonText}}</button>
 
