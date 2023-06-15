@@ -35,6 +35,8 @@ namespace Inventario.Api.Controllers
 
                 var result = _userManager.CreateAsync(new User
                 {
+                    FirstName = "Jesus",
+                    LastName = "Duran",
                     Email = "jesusduranr202@gmail.com",
                     EmailConfirmed = true,
                     UserName = "jesusduranr202@gmail.com"

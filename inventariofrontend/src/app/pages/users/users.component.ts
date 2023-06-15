@@ -26,9 +26,11 @@ export class UsersComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   display: string = 'none';
-rowSelected: User | undefined;
-newUser =false;
-  DataUsers!: Subscription;
+  rowSelected: User | undefined;
+  newUser =false;
+  usersSubscription!: Subscription;
+  showTable:boolean =true;
+  usersData!: User[];
   constructor (
 private accountService:AccountService,
 public dialog:MatDialog
@@ -37,11 +39,12 @@ ngOnInit(): void {
   this.loadData();
 }
   loadData() {
-    this.DataUsers =
+    this.usersSubscription =
     this.accountService.getUsers().subscribe(response =>{
       this.dataSource = new MatTableDataSource(response.model)
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
+      this.usersData = response.model;
     });
   }
 
@@ -64,7 +67,7 @@ onCloseHandled(dataModal:any){
 this.rowSelected =undefined;
 this.newUser=false;
 if(dataModal.refreshData){
-  this.DataUsers.unsubscribe();
+  this.usersSubscription.unsubscribe();
   this.loadData();
 }
 }
@@ -72,15 +75,21 @@ openDialog(row: User){
   const dialogRef = this.dialog.open(UserEditorDComponent, {
     width:'600px',
     data: row,
+    disableClose:true,
   });
 
   dialogRef.afterClosed().subscribe((result:any) => {
     if(!!result.refreshData){
-      this.DataUsers.unsubscribe();
+      this.usersSubscription.unsubscribe();
       this.loadData();
     }
   });
-
-}
 }
 
+changeView(){
+  this.showTable = !this.showTable;
+}
+getIniciales(usr : User){
+  return ((usr.firstName).charAt(0) + (usr.lastName).charAt(0)).toUpperCase();
+}
+}

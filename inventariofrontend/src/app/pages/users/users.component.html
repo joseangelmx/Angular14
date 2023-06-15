@@ -3,7 +3,8 @@
   <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
 </mat-form-field>
 <button mat-stroked-button color="primary" class="mx-4" (click)="openModalNew()">New User</button>
-<div class="mat-elevation-z8">
+<button mat-stroked-button color="primary" class="mx-4" (click)="changeView()">{{showTable?'Go to Card view' : 'Go to Table view'}}</button>
+<div class="mat-elevation-z8" *ngIf="showTable ; else showCards">
   <table mat-table [dataSource]="dataSource" matSort aria-hidden="true">
 
     <ng-container matColumnDef="email">
@@ -45,3 +46,20 @@
 
 <app-user-editor *ngIf="rowSelected || newUser" [row]="rowSelected" (closeModalEvent)="onCloseHandled($event)"></app-user-editor>
 
+<ng-template #showCards>
+  <div class="row col-12">
+    <div class="card text-center col-md-3 pr-md-3" *ngFor="let usr of usersData">
+      <div class="card-header">
+      <strong>{{getIniciales(usr)}}</strong> - {{usr.firstName}} {{usr.lastName}}
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">{{usr.email}}</h5>
+        <p class="card-text">{{usr.phoneNumber}}</p>
+      </div>
+      <div class="card-footer text-muted">
+        {{usr.status? 'Activo' : 'Inactivo'}}
+      </div>
+    </div>
+  </div>
+
+</ng-template>
