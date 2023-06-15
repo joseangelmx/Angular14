@@ -51,7 +51,7 @@ export class AccountService {
 
   updateUser(request: User, id:string): Observable<ResponseModel<any>>{
     let url: string = `${this.urlBase}api/user/${id}`;
-    let request2 ={...request, password:"Test01."}
+    let request2 = {...request, password:'Test01.'}
     return <any> this.http.put<ResponseModel<any>>(url,request2,this.httpOptions)
     .pipe(catchError(this.errorHandler));
   }

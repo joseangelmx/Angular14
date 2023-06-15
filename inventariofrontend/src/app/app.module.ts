@@ -11,12 +11,13 @@ import { NavbarComponent } from './share/navbar/navbar.component';
 import { HttpClientModule } from '@angular/common/http';
 import { CookieModule } from 'ngx-cookie';
 
+
 @NgModule({
   declarations: [
     AppComponent,
     InitLayoutComponent,
     AdminLayoutComponent,
-    NavbarComponent
+    NavbarComponent,
   ],
   imports: [
     BrowserModule,

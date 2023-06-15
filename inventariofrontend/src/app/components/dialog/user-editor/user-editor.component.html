@@ -1,0 +1,6 @@
+<h1 mat-dialog-title>Editor de usuario</h1>
+<div mat-dialog-content>
+
+  <app-login-form *ngIf="OpenDialog" [isSignUp]="true" [confirmButtonText]="confirmButtonText" [dataUser]="row"
+  (responseForm)="respForm($event)" (cancelForm)="cancelForm($event)"></app-login-form>
+</div>
