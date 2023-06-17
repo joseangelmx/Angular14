@@ -30,7 +30,9 @@ respForm(request: signIn){
       this.cookie.put('session',objTemp);
       this.router.navigate(['/home']);
     }
-  },(error:any)=> console.log(error)
-  );
+  },(error:any)=> {
+  this.alertS.errorAlert('Servicio no disponible por el momento, favor de contactar con el administrador','Lo sentimos')
+  console.log(error)
+});
 }
 }

@@ -47,9 +47,10 @@
 <app-user-editor *ngIf="rowSelected || newUser" [row]="rowSelected" (closeModalEvent)="onCloseHandled($event)"></app-user-editor>
 
 <ng-template #showCards>
-  <div class="row col-12">
-    <div class="card text-center col-md-3 pr-md-3" *ngFor="let usr of usersData">
-      <div class="card-header">
+  <div class="row">
+    <div class="col-md-3 py-3" *ngFor="let usr of usersData">
+    <div class="card text-center">
+      <div class="card-header text-truncate">
       <strong>{{getIniciales(usr)}}</strong> - {{usr.firstName}} {{usr.lastName}}
       </div>
       <div class="card-body">
@@ -61,5 +62,7 @@
       </div>
     </div>
   </div>
-
+</div>
 </ng-template>
+
+<app-basic-card></app-basic-card>

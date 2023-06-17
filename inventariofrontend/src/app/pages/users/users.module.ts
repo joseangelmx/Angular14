@@ -7,6 +7,7 @@ import { MaterialModule } from 'src/app/material.module';
 import { FormsModule } from '@angular/forms';
 import { UserEditorModule } from 'src/app/components/userEditor/user-editor/user-editor.module';
 import { UserEditorDModule } from 'src/app/components/dialog/user-editor/user-editor.module';
+import { BasicCardModule } from 'src/app/components/cards/basic-card/basic-card.module';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { UserEditorDModule } from 'src/app/components/dialog/user-editor/user-ed
     UserEditorModule,
     MaterialModule,
     FormsModule,
-    UserEditorDModule
+    UserEditorDModule,
+    BasicCardModule
   ]
 })
 export class UsersModule { }
