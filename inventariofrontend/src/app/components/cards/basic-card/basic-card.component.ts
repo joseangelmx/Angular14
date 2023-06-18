@@ -1,34 +1,56 @@
-import { Component } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { CardInterface, footerType } from 'src/app/core/interfaces/card-interface';
+import { User } from 'src/app/core/interfaces/user';
 
 @Component({
   selector: 'app-basic-card',
   templateUrl: './basic-card.component.html',
   styleUrls: ['./basic-card.component.scss']
 })
-export class BasicCardComponent {
+export class BasicCardComponent implements OnChanges {
 
-card : CardInterface = {
+@Input() UserData!:any;
+  card : CardInterface = {
   typeCard:'basic1',
   closeHeader:false,
   header:{
-    title:'Test title',
+    title:['firstName','lastName'],
     titleClass:'',
     siglas:'TT'
   },
   body:{
     title:'',
     titleClass:'',
-    desc:'emailTest',
+    desc:'email',
     descClass:'',
-    subDesc:'phoneTest',
+    subDesc:'phoneNumber',
     subDescClass:''
   },
   footer: {
     footerClass:'',
-    label:'Status',
-    footerType:footerType.typeLbl
+    label:'status',
+    footerType:footerType.typeBtn
   }
 }
+ngOnChanges(changes: SimpleChanges): void {
+  const {UserData} = changes;
+  if(!!UserData.currentValue){
+    this.loadUserData();
+  }
 
-}
+  }
+  loadUserData() {
+   if(this.card.header && !this.card.header?.siglas){
+    let tmpA: string[] = [];
+    this.card.header?.title?.forEach(elem=>tmpA.push((this.UserData[elem]).charAt(0)))
+    this.card.header.siglas = tmpA.join('');
+   }
+  }
+  getArrayToText(arrayText: string[]){
+    let tmpA: any[] = [];
+    arrayText.forEach(title => tmpA.push(this.UserData[title]));
+    return tmpA.join(' ');
+  }
+  }
+
+

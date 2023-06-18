@@ -64,5 +64,10 @@
   </div>
 </div>
 </ng-template>
+<div class="row">
+<ng-container *ngFor="let usr of usersData">
 
-<app-basic-card></app-basic-card>
+  <app-basic-card class="col-md-3 py-3" [UserData]="usr"></app-basic-card>
+
+</ng-container>
+</div>

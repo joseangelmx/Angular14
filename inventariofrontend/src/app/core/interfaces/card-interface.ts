@@ -16,12 +16,12 @@
 
   export interface Footer{
     footerType: footerType;
-    label?:string;
+    label:string;
     footerClass?:string;
   }
 
   export interface Header{
-    title: string;
+    title: string[];
     siglas?:string;
     titleClass?:string;
   }
