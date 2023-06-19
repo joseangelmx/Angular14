@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BasicCardComponent } from './basic-card.component';
+import { MaterialModule } from 'src/app/material.module';
 
 
 
@@ -9,7 +10,8 @@ import { BasicCardComponent } from './basic-card.component';
     BasicCardComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    MaterialModule
   ],
   exports: [BasicCardComponent]
 })

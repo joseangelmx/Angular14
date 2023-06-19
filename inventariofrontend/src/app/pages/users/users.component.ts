@@ -78,7 +78,7 @@ openDialog(row: User){
     disableClose:true,
   });
 
-  dialogRef.afterClosed().subscribe((result:any) => {
+  dialogRef.beforeClosed().subscribe((result:any) => {
     if(!!result.refreshData){
       this.usersSubscription.unsubscribe();
       this.loadData();

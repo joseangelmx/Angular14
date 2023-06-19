@@ -15,7 +15,7 @@ export class BasicCardComponent implements OnChanges {
   closeHeader:false,
   header:{
     title:['firstName','lastName'],
-    titleClass:'',
+    titleClass:'text-uppercase text-start',
     siglas:'TT'
   },
   body:{
@@ -27,9 +27,9 @@ export class BasicCardComponent implements OnChanges {
     subDescClass:''
   },
   footer: {
-    footerClass:'',
+    footerClass:'col-md-12 fw-bolder text-color-green',
     label:'status',
-    footerType:footerType.typeBtn
+    footerType:footerType.typeLbl
   }
 }
 ngOnChanges(changes: SimpleChanges): void {

@@ -11,19 +11,23 @@
 
           <div class="card-body">
             <!--Titulo y descripcion-->
-            <h5 class="card-title" [ngClass]="!!card.body.descClass ? card.body.descClass : ''">
-              {{UserData[card.body.desc]}}</h5>
+            <h4 class="card-title" [ngClass]="!!card.body.titleClass ? card.body.titleClass : ''" *ngIf="!!card.body.title" >
+              {{UserData[card.body.title]}}</h4>
+
+            <h4 class="card-title" [ngClass]="!!card.body.descClass ? card.body.descClass : ''">
+              {{UserData[card.body.desc]}}</h4>
             <p class="card-text" *ngIf="!!card.body.subDesc"
             [ngClass]="!!card.body.subDescClass ? card.body.subDescClass : ''">
             {{UserData[card.body.subDesc]}}</p>
           </div>
           <div class="card-footer text-muted">
             <!--Etiquetas o botones-->
-            <div *ngIf="card.footer.footerType == 'label';else btnFooter">
+            <div *ngIf="card.footer.footerType == 'label';else btnFooter"
+            [ngClass]="!!card.footer.footerClass ? card.footer.footerClass : ''" >
               {{UserData[card.footer.label]}}
             </div>
             <ng-template #btnFooter>
-              <button mat-raised-button class="pr-2 mr-2"
+              <button mat-button color="primary" class="pr-2 mr-2"
               [ngClass]="!!card.footer.footerClass ? card.footer.footerClass : ''" color="primary">
               {{UserData[card.footer.label]}}
               </button>
