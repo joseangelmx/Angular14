@@ -6,6 +6,10 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SidebarComponent } from './shared/sidebar/sidebar.component';
 import { NavbarComponent } from './shared/navbar/navbar.component';
+import { NgxsModule } from '@ngxs/store';
+import { environment } from 'environments/environment.prod';
+import { BooksState } from './state/books.state';
+import { CompnameState } from './state/compname.state';
 
 @NgModule({
   declarations: [
@@ -17,6 +21,9 @@ import { NavbarComponent } from './shared/navbar/navbar.component';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    NgxsModule.forRoot([BooksState,CompnameState],{
+      developmentMode:!environment.production
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]
