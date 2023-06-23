@@ -4,16 +4,74 @@
   <div class="col-md-3 py-3">
     <div class="card text-center">
       <div class="card-header text-truncate">
-      <strong>{{getIniciales(book)}}</strong> - {{book.name}}
+        <div class="row justify-content-between">
+          <div class="col-md-11">
+            <strong>{{getIniciales(book)}}</strong> - {{book.name}}
+          </div>
+
+          <div class="col-md-1 pe-auto" (click)="editBook(book)">
+            <i class="fa-solid fa-pen fa-beat" aria-hidden="true"></i>
+          </div>
+        </div>
+
       </div>
       <div class="card-body">
         <h5 class="card-title">{{book.description}}</h5>
         <p class="card-text">$ {{book.price}}</p>
       </div>
-      <div class="card-footer text-muted">
+      <div class="card-footer text-muted" (click)="EDBook(book)">
         {{book.status? 'Activo' : 'Inactivo'}}
       </div>
     </div>
   </div>
 </ng-container>
+</div>
+
+<!-- Modal -->
+<div  class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="myForm">
+          <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Id: </label>
+            <input type="number" class="form-control" formControlName="id">
+          </div>
+
+          <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Name: </label>
+            <input type="text" class="form-control" formControlName="name">
+          </div>
+
+          <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Description:</label>
+            <input type="text" class="form-control" formControlName="description">
+          </div>
+
+          <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Price: </label>
+            <input type="number" class="form-control" formControlName="price">
+          </div>
+
+          <div>
+            <label for="exampleFormControlInput1" class="form-label">Status: </label>
+          </div>
+         <div class="mb-3 form-check form-switch">
+          <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked formControlName="status">
+          <label class="form-check-label" for="flexSwitchCheckChecked">
+            Inactivo/Activo input
+          </label>
+         </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" (click)="subook()">{{isEditorMode ? 'Update book' : 'Save book'}}</button>
+      </div>
+    </div>
+  </div>
 </div>

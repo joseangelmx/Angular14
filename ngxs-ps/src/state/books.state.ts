@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { State, Action, StateContext, Selector } from '@ngxs/store';
-import { AddBooksAction, LoadBooksAction} from './books.actions';
 import { BooksService, book } from 'src/app/core/services/books.service';
 import { Observable, tap } from 'rxjs';
+import { AddBooks, LoadBooks, UpdateBook } from './books.actions';
 
 export class BooksStateModel {
   public books!: book[];
@@ -23,12 +23,12 @@ export class BooksState {
   public static getBooks ({ books }:BooksStateModel):book[]{
     return books
   }
-  @Action(AddBooksAction)
-  addBook({ getState, setState }: StateContext<BooksStateModel>, { payload }: AddBooksAction) {
+  @Action(AddBooks)
+  addBook({ getState, setState }: StateContext<BooksStateModel>, { payload }: AddBooks) {
     const state = getState();
     setState({ books: [ ...state.books, payload ] });
   }
-  @Action(LoadBooksAction)
+  @Action(LoadBooks)
   loadBooks({getState,setState}: StateContext<BooksStateModel>): Observable<book[]>{
     return this.bks.getBooks().pipe(
       tap((books:book[])=>{
@@ -36,5 +36,13 @@ export class BooksState {
         setState({...state, books})
       })
     )
+}
+
+
+@Action(UpdateBook)
+updateBook({getState,setState}: StateContext<BooksStateModel>,{payload}: UpdateBook){
+  const state = getState();
+  let bookstmp = state.books.filter(book=>book.id != payload.id);
+  setState({books: [...bookstmp,payload]})
 }
 }
