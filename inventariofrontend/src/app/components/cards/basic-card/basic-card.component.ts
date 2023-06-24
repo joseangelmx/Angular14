@@ -27,7 +27,7 @@ export class BasicCardComponent implements OnChanges {
     subDescClass:''
   },
   footer: {
-    footerClass:'col-md-12 fw-bolder text-color-green',
+    footerClass:'',
     label:'status',
     footerType:footerType.typeLbl
   }

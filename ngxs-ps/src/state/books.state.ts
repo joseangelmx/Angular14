@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { State, Action, StateContext, Selector } from '@ngxs/store';
 import { BooksService, book } from 'src/app/core/services/books.service';
 import { Observable, tap } from 'rxjs';
-import { AddBooks, LoadBooks, UpdateBook } from './books.actions';
+import { AddBooks, DeleteBook, LoadBooks, UpdateBook } from './books.actions';
 
 export class BooksStateModel {
   public books!: book[];
@@ -45,4 +45,12 @@ updateBook({getState,setState}: StateContext<BooksStateModel>,{payload}: UpdateB
   let bookstmp = state.books.filter(book=>book.id != payload.id);
   setState({books: [...bookstmp,payload]})
 }
+@Action(DeleteBook)
+DeleteBook({getState,setState}:StateContext<BooksStateModel>,{payload}:DeleteBook){
+  const state = getState();
+  let filters = state.books.filter(book=>book.id !== payload.id);
+  setState({books:[...filters]});
+
 }
+}
+

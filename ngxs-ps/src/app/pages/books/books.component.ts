@@ -4,7 +4,7 @@ import { Select, Store } from '@ngxs/store';
 
 import { book } from 'src/app/core/services/books.service';
 import { BooksState } from 'src/state/books.state';
-import {UpdateBook} from 'src/state/books.actions'
+import {DeleteBook, UpdateBook} from 'src/state/books.actions'
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
 import * as bootstrap from 'bootstrap';
@@ -57,5 +57,9 @@ ngOnInit(): void {
     }
     this.myModal.hide();
     this.isEditorMode=false;
+  }
+  DeleteBooks(book:book){
+    let book1={...book}
+    this.store.dispatch(new DeleteBook(book1))
   }
 }

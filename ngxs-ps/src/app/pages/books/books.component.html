@@ -5,13 +5,18 @@
     <div class="card text-center">
       <div class="card-header text-truncate">
         <div class="row justify-content-between">
-          <div class="col-md-11">
-            <strong>{{getIniciales(book)}}</strong> - {{book.name}}
-          </div>
 
           <div class="col-md-1 pe-auto" (click)="editBook(book)">
             <i class="fa-solid fa-pen fa-beat" aria-hidden="true"></i>
           </div>
+
+          <div class="col-md-10">
+            <strong>{{getIniciales(book)}}</strong> - {{book.name}}
+          </div>
+
+          <div class="col-md-1 pe-auto" (click)="DeleteBooks(book)">
+            <i class="fa-solid fa-trash fa-beat" aria-hidden="true"></i>
+            </div>
         </div>
 
       </div>
